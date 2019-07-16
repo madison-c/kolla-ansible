@@ -1,0 +1,17 @@
+{
+    "command": "/usr/bin/ceph-osd -f --public-addr 172.16.1.31 --cluster-addr 172.16.1.31",
+    "config_files": [
+        {
+            "source": "/var/lib/kolla/config_files/ceph.conf",
+            "dest": "/etc/ceph/ceph.conf",
+            "owner": "ceph",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/ceph.client.admin.keyring",
+            "dest": "/etc/ceph/ceph.client.admin.keyring",
+            "owner": "ceph",
+            "perm": "0600"
+        }
+    ]
+}

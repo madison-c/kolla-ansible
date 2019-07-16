@@ -1,0 +1,41 @@
+[client]
+default-character-set = utf8
+
+[mysql]
+default-character-set = utf8
+
+[mysqld]
+basedir = /usr
+bind-address = 172.16.1.31
+port = 3306
+log-error = /var/log/kolla/mariadb/mariadb.log
+log-bin = mysql-bin
+binlog_format = ROW
+expire_logs_days = 14
+default-storage-engine = innodb
+innodb_autoinc_lock_mode = 2
+collation-server = utf8_general_ci
+init-connect = SET NAMES utf8
+character-set-server = utf8
+datadir = /var/lib/mysql/
+wsrep_cluster_address = gcomm://172.16.1.31:4567,172.16.1.32:4567,172.16.1.33:4567
+wsrep_provider_options = gmcast.listen_addr=tcp://172.16.1.31:4567;ist.recv_addr=172.16.1.31:4568
+wsrep_node_address = 172.16.1.31:4567
+wsrep_sst_receive_address = 172.16.1.31:4444
+wsrep_provider = /usr/lib64/galera/libgalera_smm.so
+wsrep_cluster_name = openstack
+wsrep_node_name = control01
+wsrep_sst_method = xtrabackup-v2
+wsrep_sst_auth = root:bqfvTJ8YJ5h80pmvVIIpA5MPYEGfKslstVNwi7Lf
+wsrep_slave_threads = 4
+wsrep_notify_cmd = /usr/local/bin/wsrep-notify.sh
+wsrep_on = ON
+max_connections = 10000
+key_buffer_size = 64M
+max_heap_table_size = 64M
+tmp_table_size = 64M
+innodb_buffer_pool_size = 3928M
+
+[server]
+pid-file = /var/lib/mysql/mariadb.pid
+

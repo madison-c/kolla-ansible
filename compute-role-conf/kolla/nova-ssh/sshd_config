@@ -1,0 +1,5 @@
+Port 8022
+ListenAddress 172.16.1.34
+
+SyslogFacility AUTHPRIV
+UsePAM yes
