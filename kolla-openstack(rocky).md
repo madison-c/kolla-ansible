@@ -134,7 +134,13 @@
 	kolla-ansible  -i  inventory/multinode pull --limit compute02
 	kolla-ansible  -i  inventory/multinode deploy --limit compute02
 
-
+# 删除一个计算节点
+	kolla-ansible -i inventory/multinode destroy --limit compute02 --yes-i-really-really-mean-it
+	openstack  compute service list
+	openstack  compute service delete  <compute ID>
+	openstack  network agent list
+	openstack  network agent delete  <ID>
+	
 ## 疑难杂症
     #浮动IP down
     重启计算节点的 neutron-l3-agent  nova-compute
