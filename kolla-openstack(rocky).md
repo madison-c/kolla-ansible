@@ -15,6 +15,7 @@
     https://cloud-atlas.readthedocs.io/zh_CN/latest/ceph/bluestore.html
     https://www.voidking.com/dev-openstack-vm-block-live-migration/
     https://ceph.com/pgcalc/
+    https://docs.openstack.org/cinder/pike/man/cinder-manage.html
     
 # 开始环境装备
     (venv-kolla) [root@deploy ansible]# cat /etc/hosts
