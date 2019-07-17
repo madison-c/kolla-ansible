@@ -140,7 +140,12 @@
 	openstack  compute service delete  <compute ID>
 	openstack  network agent list
 	openstack  network agent delete  <ID>
+# 管理cinder 后端
+	docker exec -it cinder_scheduler bash
+		cinder-manage service list
+		cinder-manage service remove cinder-volume storage02@lvm-1
 	
+ 
 ## 疑难杂症
     #浮动IP down
     重启计算节点的 neutron-l3-agent  nova-compute
