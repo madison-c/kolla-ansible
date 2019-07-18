@@ -145,7 +145,16 @@
 	docker exec -it cinder_scheduler bash
 		cinder-manage service list
 		cinder-manage service remove cinder-volume storage02@lvm-1
-	
+	cinder后端存储步骤：
+	（）把存储准备好，如NFS，ISCSI
+	（）安装cinder-volume
+	（）vim /etc/cinder/cinder.conf
+	[xxx]
+	volume_driver=xxx
+	......
+	volume_backend_name=xxx-Storage
+	（）创建类型：cinder type-create xxx
+	（）关联类型：cinder type-key xxx set volume_backend_name=xxx-Storage	
  
 ## 疑难杂症
     #浮动IP down
