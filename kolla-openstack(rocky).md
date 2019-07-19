@@ -216,40 +216,6 @@
 # live migration
     https://www.voidking.com/dev-openstack-vm-block-live-migration/
     
-
-
-* PG状态概述
-
-	一个PG在它的生命周期的不同时刻可能会处于以下几种状态中:
-
-	Creating(创建中)
-	在创建POOL时,需要指定PG的数量,此时PG的状态便处于creating,意思是Ceph正在创建PG。
-	Peering(互联中)
-	peering的作用主要是在PG及其副本所在的OSD之间建立互联,并使得OSD之间就这些PG中的object及其元数据达成一致。
-
-	Active(活跃的)
-	处于该状态意味着数据已经完好的保存到了主PG及副本PG中,并且Ceph已经完成了peering工作。
-
-	Clean(整洁的)
-	当某个PG处于clean状态时,则说明对应的主OSD及副本OSD已经成功互联,并且没有偏离的PG。也意味着Ceph已经将该PG中的对象按照规定的副本数进行了复制操作。
-
-	Degraded(降级的)
-	当某个PG的副本数未达到规定个数时,该PG便处于degraded状态,例如:
-	在客户端向主OSD写入object的过程,object的副本是由主OSD负责向副本OSD写入的,直到副本OSD在创建object副本完成,并向主OSD发出完成信息前,该PG的状态都会一直处于degraded状态。
-	又或者是某个OSD的状态变成了down,那么该OSD上的所有PG都会被标记为degraded。
-	当Ceph因为某些原因无法找到某个PG内的一个或多个object时,该PG也会被标记为degraded状态。此时客户端不能读写找不到的对象,但是仍然能访问位于该PG内的其他object。
-
-
-
-	Recovering(恢复中)
-	当某个OSD因为某些原因down了,该OSD内PG的object会落后于它所对应的PG副本。而在该OSD重新up之后,该OSD中的内容必须更新到当前状态,处于此过程中的PG状态便是recovering。
-
-	Backfilling(回填)
-	当有新的OSD加入集群时,CRUSH会把现有集群内的部分PG分配给它。这些被重新分配到新OSD的PG状态便处于backfilling。
-
-	Remapped(重映射)
-	当负责维护某个PG的acting set变更时,PG需要从原来的acting set迁移至新的acting set。这个过程需要一段时间,所以在此期间,相关PG的状态便会标记为remapped。
-
-	Stale(陈旧的)
-	默认情况下,OSD守护进程每半秒钟便会向Monitor报告其PG等相关状态,如果某个PG的主OSD所在acting set没能向Monitor发送报告,或者其他的Monitor已经报告该OSD为down时,该PG便会被标记为stale。
++ pg 状态信息
+	https://www.jianshu.com/p/a104d156f120
 	
