@@ -15,6 +15,7 @@
     https://cloud-atlas.readthedocs.io/zh_CN/latest/ceph/bluestore.html
     https://www.voidking.com/dev-openstack-vm-block-live-migration/
     https://ceph.com/pgcalc/
+    https://docs.openstack.org/cinder/pike/man/cinder-manage.html
     
 # 开始环境装备
     (venv-kolla) [root@deploy ansible]# cat /etc/hosts
@@ -134,7 +135,27 @@
 	kolla-ansible  -i  inventory/multinode pull --limit compute02
 	kolla-ansible  -i  inventory/multinode deploy --limit compute02
 
-
+# 删除一个计算节点
+	kolla-ansible -i inventory/multinode destroy --limit compute02 --yes-i-really-really-mean-it
+	openstack  compute service list
+	openstack  compute service delete  <compute ID>
+	openstack  network agent list
+	openstack  network agent delete  <ID>
+# 管理cinder 后端
+	docker exec -it cinder_scheduler bash
+		cinder-manage service list
+		cinder-manage service remove cinder-volume storage02@lvm-1
+	cinder后端存储步骤：
+	（）把存储准备好，如NFS，ISCSI
+	（）安装cinder-volume
+	（）vim /etc/cinder/cinder.conf
+	[xxx]
+	volume_driver=xxx
+	......
+	volume_backend_name=xxx-Storage
+	（）创建类型：cinder type-create xxx
+	（）关联类型：cinder type-key xxx set volume_backend_name=xxx-Storage	
+ 
 ## 疑难杂症
     #浮动IP down
     重启计算节点的 neutron-l3-agent  nova-compute
