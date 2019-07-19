@@ -123,6 +123,15 @@
 	osd pool default pgp num = 128
 	mon max pg per osd = 3000
 	kolla-ansible  -i  inventory/multinode reconfigure
+	
+	docker exec -it ceph_mon bash
+		ceph osd pool set vms pg_num 128 
+		ceph osd pool set vms pgp_num 128 
+		ceph osd pool set volumes pg_num 128 
+		ceph osd pool set volumes pgp_num 128 
+		ceph osd pool set images pg_num 128 
+		ceph osd pool set images pgp_num 128 
+		ceph osd pool get vms pg_num
  
 # 新增加一个计算节点
 	curl -sSL https://get.docker.io | bash
