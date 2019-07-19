@@ -219,6 +219,7 @@
 
 
 * PG状态概述
+
 	一个PG在它的生命周期的不同时刻可能会处于以下几种状态中:
 
 	Creating(创建中)
@@ -251,3 +252,4 @@
 
 	Stale(陈旧的)
 	默认情况下,OSD守护进程每半秒钟便会向Monitor报告其PG等相关状态,如果某个PG的主OSD所在acting set没能向Monitor发送报告,或者其他的Monitor已经报告该OSD为down时,该PG便会被标记为stale。
+	
