@@ -76,4 +76,16 @@
             docker_namespace: "kolla"
             #docker_registry_username: "sam"
             #docker_registry_password: "correcthorsebatterystaple"
-        
+
+
+
+# 清理镜像释放空间
+```
+$ docker-compose stop
+
+$ docker run -it --name gc --rm --volumes-from registry vmware/registry:2.6.2-photon garbage-collect --dry-run /etc/registry/config.yml
+
+$ docker run -it --name gc --rm --volumes-from registry vmware/registry:2.6.2-photon garbage-collect  /etc/registry/config.yml
+
+$ docker-compose start
+```
